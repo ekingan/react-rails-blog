@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
 	def topposts
 		@posts = Post.highest_rated
+		@locations = Post.all.uniq.pluck(:location)
 	end
 
 	def randomposts

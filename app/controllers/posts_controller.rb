@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@comments = Comment.where(post_id: @post)
 	end
 
 	def upvote
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
 	private
 
 		def post_params
-			params.require(:post).permit(:body, :location)
+			params.require(:post).permit(:body, :location, :category_id)
 		end
 
 end

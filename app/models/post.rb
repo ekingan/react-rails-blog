@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
 
 	def self.search(params)
 		posts = Post.where("body LIKE ?", "%#{params[:search]}%") if params[:search].present?
-		posts 
+		posts
 	end
 
 end
