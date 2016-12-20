@@ -5,6 +5,11 @@
       <%= form_for @post do |f| %>
       <div class="form-group">
         <p>
+        <%= f.label :title, "Title" %>
+        <%= f.text_field :title, class: "form_control" %>
+        </p>
+      <div class="form-group">
+        <p>
         <%= f.label :location, "Location" %>
         <%= f.text_field :location, class: "form_control" %>
         </p>

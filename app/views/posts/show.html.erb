@@ -1,12 +1,38 @@
 <div class="container">
-  <div class="row">
-    <hr>
-    <div class="row">
-      <%= @post.location %>
-      <br>
-      <%= @post.body %>
-      <br>
-      <%= @post.category.name %>
+  <div class="col-md-6 col-md-offset-3">
+    <h3> <%= @post.title  %></h3>
+    <div class="well">
+        <%= @post.location %>
+        <br>
+        <%= @post.body %>
+        <br>
+        <br>
+        <%= link_to "Definitely doing that!", like_post_path(@post), method: :put, class: "btn btn-success btn-xs" %>
+        <span class="text-success">(<%= @post.get_upvotes.size %>)</span>
+        <%= link_to "Not Interested", dislike_post_path(@post), method: :put, class: "btn btn-warning btn-xs" %>
+        <span class="text-warning">(<%= @post.get_downvotes.size %>)</span>
+        <%= link_to "Comments", post_path(@post), class:"btn btn-link btn-xs" %> <small><em>(<%= @post.comments.count %>)</em></small>
+        <span class="text-muted pull-right"><small>Created By: <%= @post.user.name %> on
+        <%= @post.created_at.strftime("%B %d, %Y at %l:%M %p") %></small></span>
+        <br>
+        <span class="text-muted pull-right"><small>Category: <%= @post.category.name %></small></span>
     </div>
+    <h4>Comments</h4>
+    <%= form_for [@post, Comment.new] do |f| %>
+      <%= f.text_area :body, class:"form-control", placeholder: "add a comment" %> <br>
+      <%= f.submit "add comment", class: "btn btn-primary" %>
+    <% end %>
+    <br>
+
+      <ul class="list-group">
+        <% @post.comments.each do |comment| %>
+        <li class="list-group-item"><%=comment.body%>
+          <span class="text-muted pull-right"><small>Created By: <%= @post.user.name %> on
+          <%= @post.created_at.strftime("%B %d, %Y at %l:%M %p") %></small></span>
+        </li>
+
+        <% end %>
+      </ul>
+
   </div>
 </div>

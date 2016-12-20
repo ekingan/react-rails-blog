@@ -4,8 +4,8 @@
 	  <div class="col-md-9">
 	    <% @posts.each do |post| %>
 	    <div class="well">
-	      	<%= post.location %>
-					<br>
+          <%= post.location %> - <%= link_to post.title, post_path(post) %>
+          <br>
 					<%= post.body %>
 	        <br>
 	        <br>
@@ -34,7 +34,7 @@
 		              <tbody>
 		                <tr>
 		                  <td>
-		                  <%= link_to location %>
+		                  <%= link_to location, 'data_gallery' => location %>
 		                  </td>
 		                </tr>
 		              </tbody>

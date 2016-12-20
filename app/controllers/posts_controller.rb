@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
-		@comments = Comment.where(post_id: @post)
+		@comments = @post.comments
 	end
 
 	def upvote
@@ -39,6 +39,7 @@ class PostsController < ApplicationController
 	end
 
 	def search
+		@locations = Post.all.uniq.pluck(:location)
 		if params[:search].blank?
 			@posts = Post.all
 		else
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
 	private
 
 		def post_params
-			params.require(:post).permit(:body, :location, :category_id)
+			params.require(:post).permit(:body, :location, :title, :category_id)
 		end
 
 end
