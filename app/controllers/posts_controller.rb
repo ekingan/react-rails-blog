@@ -30,6 +30,22 @@ class PostsController < ApplicationController
 		@comments = @post.comments
 	end
 
+	def edit
+		@post = Post.find(params[:id])
+	end
+
+	def update
+		@post = Post.find(params[:id])
+		@post.update_attributes(post_params)
+		redirect_to @post
+	end
+
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to action: "index"
+	end
+
 	def upvote
 		@post = Post.find(params[:id])
 		@post.upvote_from current_user
