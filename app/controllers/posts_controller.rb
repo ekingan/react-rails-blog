@@ -38,6 +38,10 @@ class PostsController < ApplicationController
 		redirect_to :back
 	end
 
+	def filter_location
+		@posts = Post.where(location: location)
+	end
+
 	def search
 		@locations = Post.all.uniq.pluck(:location)
 		if params[:search].blank?
