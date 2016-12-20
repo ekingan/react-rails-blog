@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
 	belongs_to :user
 	has_many :comments
 
+	validates :title, :location, :body, :category, :presence => true
+
 	acts_as_votable
 
 	def self.highest_rated

@@ -14,8 +14,7 @@
         <%= link_to "Comments", post_path(@post), class:"btn btn-link btn-xs" %> <small><em>(<%= @post.comments.count %>)</em></small>
         <span class="text-muted pull-right"><small>Created By: <%= @post.user.name %> on
         <%= @post.created_at.strftime("%B %d, %Y at %l:%M %p") %></small></span>
-        <br>
-        <span class="text-muted pull-right"><small>Category: <%= @post.category.name %></small></span>
+        <span class="text-muted pull-left"><small>Category: <%= @post.category.name %></small></span>
     </div>
     <h4>Comments</h4>
     <%= form_for [@post, Comment.new] do |f| %>

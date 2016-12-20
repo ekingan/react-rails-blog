@@ -2,8 +2,12 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :upvote, :downvote]
 
 	def index
-		@posts = Post.all.order(id: :desc).page(params[:page]).per(10)
-		@locations = Post.all.uniq.pluck(:location)
+		@locations  = Post.all.uniq.pluck(:location)
+		if params[:location]
+			@posts = Post.where(:location => params[:location]).page(params[:page]).per(10)
+		else
+			@posts = Post.all.order(id: :desc).page(params[:page]).per(10)
+		end
 	end
 
 	def new
@@ -16,7 +20,7 @@ class PostsController < ApplicationController
 		if @post.save
 			redirect_to @post
 		else
-			flash[:danger] = @post.errors.full_messages.to_sentance
+			flash[:danger] = @post.errors.full_messages.to_sentence
 			render :new
 		end
 	end
@@ -36,10 +40,6 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@post.downvote_from current_user
 		redirect_to :back
-	end
-
-	def filter_location
-		@posts = Post.where(location: location)
 	end
 
 	def search

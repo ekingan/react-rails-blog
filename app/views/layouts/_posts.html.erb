@@ -27,14 +27,14 @@
 		    <div class="panel-body" style="padding: 0px;">
 		      <div style="padding: 0px;">
 		        <div class="table-responsive" style="border-left: 0px;">
-		          <% @locations.each do |location| %>
+		          <% @locations.shuffle[0..10].each do |location| %>
 		          <table class="table table-striped table-hover table-bordered" style="margin: 0px;">
 		            <thead>
 		             </thead>
 		              <tbody>
 		                <tr>
 		                  <td>
-		                  <%= link_to location, 'data_gallery' => location %>
+		                  <%= link_to location, posts_path(:location => location) %>
 		                  </td>
 		                </tr>
 		              </tbody>

@@ -28,5 +28,6 @@ Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
 todo:
-Search by location
-Add comments
+Search bar also searches locations and titles, not just body
+ability to edit and delete posts.
+upload a pic
