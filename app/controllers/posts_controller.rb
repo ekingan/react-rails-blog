@@ -8,6 +8,10 @@ class PostsController < ApplicationController
 		else
 			@posts = Post.all.order(id: :desc).page(params[:page]).per(10)
 		end
+		respond_to do |format|
+			format.html
+			format.json { render json: @posts.to_json }
+		end
 	end
 
 	def new

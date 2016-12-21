@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   	member do
   		put :like, to:'posts#upvote'
   		put :dislike, to:'posts#downvote'
+      get :category, to: "categories#post_category"
+      get :user, to: "user#post_user"
   	end
     collection do
     get :search

@@ -1,6 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :find_commentable
+  before_action :authenticate_user!, except: :index
 
+  def index
+    @comments = Comment.where(post_id: params[:post_id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @comments }
+    end
+  end
   def new
     @comment = Comment.new
   end
