@@ -18,23 +18,9 @@
         <span class="text-muted pull-left"><small>Category: <%= @post.category.name %></small></span>
     </div>
     <h4>Comments</h4>
-    <%= form_for [@post, Comment.new] do |f| %>
+    <%= form_for([@post, @comment]) do |f| %>
       <%= f.text_area :body, class:"form-control", placeholder: "add a comment" %> <br>
-      <%= f.submit "add comment", class: "btn btn-primary" %>
+      <%= f.submit "Submit", class: "btn btn-primary" %> <%= link_to "Delete", post_comment_path, class: "btn btn-danger", method: :delete  %>
     <% end %>
-    <br>
-
-      <ul class="list-group">
-        <% @post.comments.each do |comment| %>
-        <li class="list-group-item"><%=comment.body%>
-          <span class="text-muted pull-right"><small>Created By: <%= @post.user.name %> on
-            <%= @post.created_at.strftime("%B %d, %Y at %l:%M %p") %></small>
-            <%= link_to "Edit", edit_post_comment_path(@post.id, comment.id), class:"btn btn-link btn-xs pull-right" %>
-          </span>
-        </li>
-
-        <% end %>
-      </ul>
-
   </div>
 </div>
