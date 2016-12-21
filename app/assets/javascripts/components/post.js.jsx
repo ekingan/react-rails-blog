@@ -36,17 +36,46 @@ var Post = React.createClass({
     }.bind(this));
   },
 
+  handleUpvote: function(e) {
+    e.preventDefault();
+    $.ajax({
+      method: 'PUT',
+      url: '/posts/' + this.props.post.id + '/like',
+      success: function(e) {
+        this.setState({
+          upvotes: e.cached_votes_up,
+          downvotes: e.cached_votes_down
+        })
+      }.bind(this)
+    })
+  },
+  handleDownvote: function(e) {
+    e.preventDefault();
+    $.ajax({
+      method: 'PUT',
+      url: '/posts/' + this.props.post.id + '/dislike',
+      success: function(e) {
+        this.setState({
+          upvotes: e.cached_votes_up,
+          downvotes: e.cached_votes_down
+        })
+      }.bind(this)
+    })
+  },
+
   render: function() {
     return (
       <div className="well">
-          { this.props.post.location , this.props.post.title}
-          <br>
+          { this.props.post.title }
+          <br/>
           { this.props.post.body }
           <br/>
           <br/>
-          <a className="btn btn-success btn-xs"> Definitely doing that!</a>
+          <a className="btn btn-success btn-xs"
+            onClick={ this.handleUpvote }> Definitely doing that!</a>
           <span className="text-success">({ this.state.upvotes })</span>
-          <a className="btn btn-warning btn-xs"> Not Interested </a>
+          <a className="btn btn-warning btn-xs"
+            onClick={ this.handleDownvote }> Not Interested </a>
           <span className="text-warning">({ this.state.downvotes })</span>
           <a className="btn btn-link btn-xs"> Comments </a>
           <small><em>({ this.state.commentCount })</em></small>
@@ -55,6 +84,6 @@ var Post = React.createClass({
           <br/>
           <span className="text-muted pull-right"><small>Category: { this.state.categoryName } </small></span>
       </div>
-    )
+    );
   }
 })

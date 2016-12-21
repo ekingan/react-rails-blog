@@ -34,6 +34,7 @@ var Posts = React.createClass({
             </div>
           </div>
         </div>
-    )
+    
+    );
   }
 })

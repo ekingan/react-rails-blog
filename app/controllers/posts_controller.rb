@@ -51,15 +51,13 @@ class PostsController < ApplicationController
 	end
 
 	def upvote
-		@post = Post.find(params[:id])
-		@post.upvote_from current_user
-		redirect_to :back
+		@post.upvote_by(current_user)
+		render json: @post
 	end
 
 	def downvote
-		@post = Post.find(params[:id])
-		@post.downvote_from current_user
-		redirect_to :back
+		@post.downvote_by(current_user)
+		render json: @post
 	end
 
 	def search
